@@ -1,0 +1,120 @@
+@charset "UTF-8";
+
+/*화면 고정용 전체폭 추가*/
+.container {
+	width: 1000px;
+	min-width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+} 
+
+span#warning{
+	display: inline-block;
+	font-weight: bold;
+	color: maroon;
+	padding: 10px;
+}
+
+
+.cart_table {
+	background-color: #fff;
+	width: 100%;
+	border-collapse: collapse;
+	border: 1px solid #ddd !important;
+}
+
+th {
+	padding: 10px 0;
+	background-color: #eee;
+}
+
+td {
+	border: 2px dotted #ddd;
+	background-color: #fff;
+	text-align: center;
+	vertical-align: middle;
+	padding: 5px 0;
+}
+
+
+.cart_table img {
+	width: 50%;
+	display: inline-block;
+}
+
+.comment {
+	width: 40%;
+	height: 50%;
+	display: inline-block;
+	vertical-align: top;
+	text-align: left;
+}
+
+#buttonLine {
+	width: 405px;
+	height: 150px;
+	margin-left: auto;
+}
+
+.table1 {
+	width: 30%;
+}
+.table2 {
+	width: 10%;
+}
+.table3 {
+	width: 10%;
+}
+.table4 {
+	width: 15%;
+}
+.table5 {
+	width: 10%;
+}
+
+.sum_cart {
+	text-align: right;
+	margin-bottom: 50px;
+	padding: 10px 20px;
+	background-color: #eee;
+	font-weight: bold;
+	font-size: 1.3em;
+}
+
+.cart_table input{
+	margin: 0;
+	padding: 5px;
+	width: 100px;
+}
+
+input[type=text] {
+	text-align: center;
+	border: 2px solid #eee;
+}
+
+.btn-primary{
+	width: 200px;
+}
+.btn-default{
+	width: 200px;
+}
+.btn-primary:hover {
+	color: #fff;
+	background-color: #ff9c87;
+	border-color: #ff9c87;
+}
+.btn-primary.focus, .btn-primary:focus {
+	box-shadow: 0 0 0 3px rgba(255, 153, 86, .5)
+}
+.btn-primary.active, .btn-primary:active, .show>.btn-primary.dropdown-toggle
+	{
+	background-color: #ff9c87;
+	background-image: none;
+	border-color:#ff9c87;
+}
+.btn-default:hover, .btn-default:focus{
+	color: #fff;
+	background-color: #c0c0c0;
+	border-color: #c0c0c0;
+	
+}

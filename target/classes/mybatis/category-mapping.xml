@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.categoryMapper">
+  	<!-- 카테고리 추가 -->
+  	<insert id="insert" parameterType="category">
+  		INSERT INTO category
+  		VALUES(seq_category.nextval,#{category_name},#{category_image},0)
+  	</insert>
+  	
+  	<select id="getCategory" resultType="category">
+		SELECT * FROM category
+	</select>
+	
+	<select id="getCategoryArticle" parameterType="int" resultType="category">
+		SELECT * FROM category WHERE i_category=#{i_category}
+	</select>
+	
+	<update id="update" parameterType="category">
+		UPDATE category 
+		SET category_name=#{category_name}, category_image=#{category_image},
+		category_ongoing=#{category_ongoing} where i_category=#{i_category}
+	</update>
+</mapper>

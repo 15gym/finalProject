@@ -1,0 +1,204 @@
+﻿@charset "UTF-8";
+
+* {
+	margin: 0px;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+	
+#header {
+	position: relative;
+	min-width: 1200px;
+	height: 520px;
+	background: url(../../img/header_main.jpg) no-repeat center center;
+	margin: 0px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.member {
+	min-width: 100%;
+	height: 80px;
+	position: fixed;
+	background-color: black;
+	opacity: 0.5;
+	text-align: right;
+}
+
+.member>ul {
+	list-style: none;
+	padding-top: 30px;
+	padding-right: 100px;
+}
+
+.member>ul>li {
+	display: inline;
+	color: white;
+}
+
+.member>ul>li>a {
+	text-decoration: none;
+}
+
+.member>ul>li>a>span {
+	color: white;
+	font-size: 15px;
+}
+
+.member>ul>li>a>span:hover {
+	background-color: #ffb497;
+}
+
+#header>ul {
+	padding-top: 80px;
+	bottom: 120px;
+	text-align: center;
+}
+
+#header>ul>li {
+	display: inline-block;
+	list-style: none;
+	padding: 15px;
+}
+
+#header>ul>li>a {
+	text-decoration: none !important;
+}
+
+#header>ul>li>a>span {
+	margind: 0px;
+	display: block;
+	width: 150px;
+	height: 40px;
+	vertical-align: middle;
+	color: white;
+	font-family: serif;
+	font-size: 30px;
+	font-weight: bold;
+	padding: 5px;
+}
+
+#header>ul>li:hover {
+	border: 1px solid white;
+}
+
+#nav {
+	margin: 0px;
+	min-width: 1200px;
+	height: 230px;
+	background-color: #f9f3ec;
+}
+
+#nav>ul {
+	padding-top: 50px;
+	text-align: center;
+}
+
+#nav>ul>li {
+	display: inline-block;
+	text-align: center;
+	list-style: none;
+	padding: 10px 100px;
+	margin: -3px;
+	height: 100%;
+}
+
+#nav>ul>li>a {
+	text-decoration: none !important;
+}
+
+#nav>ul>li>a>span {
+	color: #000;
+	font-weight: bold;
+}
+
+#nav>ul>li:hover {
+	border-radius: 10px;
+	background-color: #ffb497;
+}
+
+#nav>ul>a>span {
+	display: inline-block;
+	height: 100px;
+	padding-top: 30px;
+	padding-bottom: 10px;
+}
+
+#nav>ul>a>span:hover {
+	border-radius: 10px;
+	background-color: #ffb497;
+}
+
+#section{	
+
+	background-color: #f9f3ec;
+}
+
+
+
+#about {
+	min-width: 1200px;
+	height: 900px;
+	background: url(../../img/about.jpg) no-repeat 0 150px;
+	text-align: center;
+}
+
+.about_title {
+	min-width: 1200px;
+	height: 120px;
+	background-color: #F3EED7;
+	text-align: center;
+	padding-top: 50px;
+	margin-bottom: 0px;
+}
+
+.detail1, .detail2, .detail3 {
+	margin-top: 50px;
+	color: white;
+}
+
+.store_title {
+	min-width: 1200px;
+	height: 80px;
+	background-color: #F3EED7;
+	text-align: center;
+	padding-top: 10px;
+	margin: 0px;
+}
+
+#footer {
+	color: #bbb;
+	font-weight: bold;
+	min-width: 1200px;
+	margin: 0px;
+	height: 180px;
+	background: #756e6c;
+	text-align: center;
+	 
+}
+
+.foot_menu>li {
+	padding: 100px;
+}
+
+.foot_menu>li>a {
+	text-decoration: none;
+	color: #bbb;
+	font-size: 30px;
+}
+
+.foot_menu>li>a:hover {
+	color: #000;
+}
+
+.foot_menu {
+	list-style: none;
+}
+
+.foot_menu>li {
+	display: inline-block;
+}
+

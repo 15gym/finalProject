@@ -1,0 +1,264 @@
+@charset "UTF-8";
+
+
+
+/* tab */
+.set_tab {
+	position: relative;
+	margin-bottom: -1px;
+	background-color: #f9f3ec;
+	border-bottom: 1px solid #f2ece1;
+	text-align: center;
+}
+
+.set_tab li {
+	display: inline-block;
+	margin: 0 -1px;
+	vertical-align: middle;
+}
+
+.set_tab li a:before {
+	display: inline-block;
+	width: 20px;
+	height: 22px;
+	margin: 0 10px -4px 0;
+	content: "";
+}
+
+.set_tab li.menu01 a:before {
+	content: none;
+}
+
+.set_tab li.menu03 a:before {
+	width: 23px;
+	background-position: -220px 0;
+}
+
+.set_tab li.menu04 a:before {
+	width: 25px;
+	background-position: -250px 0;
+}
+
+.set_tab li.menu05 a:before {
+	width: 17px;
+	background-position: -280px 0;
+}
+
+.set_tab a {
+	display: block;
+	min-width: 78px;
+	height: 18px;
+	padding: 32px 50px 29px;
+	color: #69625c;
+	font-weight: 400;
+	font-size: 14px;
+}
+
+.set_tab a:hover {
+	background-color: #ede7dd;
+}
+
+/* 게시판-목록 */
+.board_list table {
+	border-bottom: 1px solid #69635e;
+}
+
+.board_list table th, .board_list table td {
+	height: 24px;
+	padding: 15px 5px 16px 16px;
+	border-top: 1px solid #d9d4cc;
+	font-size: 14px;
+}
+
+.board_list table th {
+	font-weight: 400;
+}
+
+.board_list table td {
+	text-align: center;
+}
+
+.board_list table tr:hover th, .board_list table tr:hover td {
+	background-color: #ded8cb;
+}
+
+.board_list .faq_num {
+	padding: 21px 10px;
+	vertical-align: top;
+	text-align: center;
+}
+/* FAQ */
+.board_list.faq table td {
+	padding: 15px 5px;
+	color: #69625c;
+}
+
+.faq tr.set_odd th, .faq tr.set_odd td {
+	background-color: #eae4dd;
+}
+
+.board_list.faq table .data_sort {
+	padding-left: 24px;
+	text-align: left;
+	font-weight: 400;
+}
+
+.board_list.faq table .data_question {
+	padding: 0;
+}
+
+.board_list.faq table .data_question a {
+	display: block;
+	padding: 15px 5px 15px 45px;
+	text-align: left;
+	font-weight: 400;
+	font-size: 16px;
+}
+
+.board_list.faq .data_question a:before {
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	margin: 0 12px -3px -34px;
+	content: "";
+}
+
+.board_list.faq table .faq_answer td {
+	padding: 38px 70px 38px 138px;
+	background-color: #e6e0d8;
+	text-align: left;
+	font-size: 14px;
+	line-height: 24px;
+}
+
+.board_list.faq table .faq_answer td:before {
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	margin: 0 12px -3px -34px;
+	content: "";
+}
+
+.faq_content {
+	background-color: #ded8cb;
+}
+
+.faq_subject>td {
+	background-color: #e0d9cf;
+}
+
+.faq_subject>a {
+	text-decoration: none;
+	color: #69625c;
+}
+
+.faq_question>td {
+	background-color: #eae4dd;
+}
+
+#section2 {
+	background-color: #f9f3ec;
+}
+#background{
+	background-color: #f9f3ec;
+}
+
+.board_list.faq>table {
+	width: 1100px;
+}
+
+/*답변보기 이미지(안들어감)*/
+.btn_img {
+	overflow: hidden;
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	background: url(../../img/faq_img.png) no-repeat 0 0;
+	border: none;
+	vertical-align: middle;
+	color: transparent;
+	font-size: 0;
+	line-height: 0;
+	white-space: nowrap;
+	text-indent: 100%;
+	cursor: pointer;
+}
+
+.btn_img:hover {
+	background-position: -50px 0;
+}
+
+.btn_img.view {
+	width: 11px;
+	height: 6px;
+	background-position: -400px -50px;
+}
+
+tr.active .btn_img.view {
+	background-position: -420px -50px;
+}
+/*페이지*/
+.pagination {
+	position: relative;
+	margin-top: 40px;
+	text-align: center;
+	padding-bottom: 30px;
+	background-color: #f9f3ec;
+}
+
+.pagination a {
+	display: inline-block;
+	height: 20px;
+	margin: 0 -2px;
+	padding: 17px 25px;
+	border: 1px solid #d9d4cc;
+	vertical-align: middle;
+}
+
+.pagination a:hover {
+	position: relative;
+	border-color: #69635e;
+}
+
+.pagination .page_num {
+	display: inline-block;
+}
+
+.pagination .page_num a {
+	margin-left: -1px;
+	color: #69635e;
+	font-size: 14px;
+}
+
+.pagination .page_num a.active {
+	background-color: #69635e;
+	border-color: #69635e;
+	color: #fff;
+}
+
+.pagination .page_prev span, .pagination .page_next span {
+	overflow: hidden;
+	display: block;
+	width: 24px;
+	height: 17px;
+	margin: 1px 14px;
+	background: url(../../img/left.png) no-repeat -320px -50px;
+	white-space: nowrap;
+	text-indent: 100%;
+}
+
+.pagination .page_next span {
+	background-position: -350px -50px;
+	white-space: nowrap;
+	text-indent: 100%;
+}
+
+.pagination .side01 {
+	position: absolute;
+	left: 0;
+	top: 50%;
+}
+
+.pagination .side01 .btn_sm {
+	margin-top: -12px;
+}

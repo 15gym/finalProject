@@ -1,0 +1,371 @@
+@charset "utf-8";
+/*
+ * 파일명 : itemList.css
+ * 기능설명: 컨텐츠 스타일
+ * 작성자 : 백경호
+ * 최종수정일 :	2018-09-13
+ */
+ 
+ #section{
+   	background-color:#e6e0d5;
+ 	min-height: 500px;
+ 	width:100%;
+ }
+ 
+ #container{
+    text-align:center;
+	border:5px solid #faf7f2;
+  	background-color:#faf7f2;
+ 	width:910px;
+ 	min-height:500px;
+ 	height:auto;
+ 	margin:0 auto;
+ }
+ .cutting_line{
+  	width:600px;
+	margin-top:20px;
+	margin-bottom:20px;
+	border-color:#804000;
+	clear:both;
+}
+ /**
+ 	상세보기
+ */
+  #image_place{
+ 	 text-align:center;
+     float:left;
+ }
+ #detail_layer{
+  	visibility:hidden;
+  	position:absolute;
+ 	list-style:none;
+    text-align:center;
+  	background-color:#faf7f2;
+  	width:690px;
+ 	min-height:490px;
+	color:#69635e;
+ }
+ 
+
+ #detail_place{
+ 	display:block;
+ 	padding-top:50px;
+ 	height:100px;
+ }
+ 
+#detail_name{
+	width:200px;
+	text-align:center;
+	display:inline-block;
+} 
+#detail_desc{
+	padding-left:300px;
+	width:270px;
+	display:block;
+}
+
+ #detail_image{
+    display:block;
+  	width:200px;
+ 	height:200px;
+ }
+ 
+#detail_form .item_add{
+    display:inline-block;
+    font-size:1.6em;
+    background-color: #ffe4ca;
+    border-left:2px solid white;
+    border-top:2px solid white;
+    border-bottom:2px solid #ffce9d;
+    border-right:2px solid #ffce9d;
+    color:#ffaf60;
+    text-align:center;
+    width:100px;
+    height:30px;
+ }
+ 
+ #detail_form #detail_price{
+    display:inline-block;
+    font-size:1.6em;
+    border:0px solid black;
+    background-color:transparent;
+    text-align:center;
+    width:100px;
+    height:30px;
+ }
+ 
+ #detail_form{
+ 	margin-bottom: 40px;
+ }
+ 
+ #detail_form > .item_qty{
+    display:inline-block;
+    border:0px solid transparent;
+    background-color: transparent;
+    color:#69635e;
+    margin: 1px;
+    font-size:1.6em;
+    text-align:center;
+ 	width:30px;
+ 	height:30px;
+
+ }
+ 
+   #detail_form > .minus, #detail_form > .plus{
+    display:inline-block;
+    border:0px solid black;
+    background-color: #ffe4ca;
+    border-left:2px solid white;
+    border-top:2px solid white;
+    border-bottom:2px solid #ffce9d;
+    border-right:2px solid #ffce9d;
+    color:#ffaf60;
+    margin: 1px;
+    font-size:1.6em;
+    text-align:center;
+ 	width:30px;
+ 	height:30px;
+
+ }
+ 
+#detail_form > .item_add:hover, #detail_form > .minus:hover, #detail_form > .plus:hover, #detail_form > .detail_view:hover{
+    background-color:#ff9326;
+	color:#ffe8d0;
+}
+
+#detail_form #return_list{
+	display:inline-block;
+    background-color: #ffe4ca;
+    border-left:2px solid white;
+    border-top:2px solid white;
+    border-bottom:2px solid #ffce9d;
+    border-right:2px solid #ffce9d;
+    margin-top:7px;
+    color:#ffaf60;
+    font-weight:bold;
+    font-size:1.3em;
+    text-align:center;
+ 	width:250px;
+ 	height:40px;
+}
+#detail_form #return_list:hover{
+	background-color:#ff9326;
+	color:#ffe8d0;
+	margin-left:1px;
+	margin-top:9px;
+	margin-bottom:-2px;
+}
+
+/**
+	리뷰
+*/
+#review_layer ul,#review_layer li{
+	list-style: none;
+}
+
+#review_title p{
+	text-align:left;
+	display:inline; font-weight:bold;
+	float:left;
+}
+#review_t_grade{
+	padding-left:40px;
+}
+#review_t_desc{
+	padding-left:200px;
+}
+
+
+
+#top_line{
+	margin-top:20px;
+	margin-bottom:20px;
+	border-color:#804000;
+	clear:both
+}
+
+.star_grade{
+	display:inline;
+	
+	float:left;
+	overflow:hidden;
+	background-size:20px 20px;
+	background-image:url("../../img/grade1.png"); /*각 컴퓨터 설정에 따라 수정!!  */
+	background-repeat:repeat-x;
+	width: 100px;
+	height: 20px;
+}
+
+.star_grade span{
+	background-size:20px 20px;
+	background-image:url("../../img/grade2.png"); /*각 컴퓨터 설정에 따라 수정!!  */
+	background-repeat:repeat-x;
+	display:inline;
+	float:left;
+	height: 20px;
+}
+.review_desc{
+	text-align:left;
+	display:inline; font-weight:bold;
+	float:left;
+}
+.review_date{
+	text-align:left;
+	font-weight:bold;
+	float:left;
+	display:inline;
+	padding-left:20px;
+	margin-bottom:15px;
+}
+
+.review_date:after{
+	clear:both;
+}
+.user_id{
+	text-align:left;
+	display:inline; font-weight:bold;
+	float:left;;
+	margin-bottom:15px;
+}
+
+
+/**
+	itemList
+*/
+
+.item_position{
+	border:5px solid red;
+	width:170px;
+ 	height:170px;
+}
+.itemlist{
+	margin-top: 20px;
+}
+ .itemlist > li{
+ 	float:left;
+ 	display:block;
+ 	background-color:#faf7f2;
+	border:1px solid #e6e0d5;
+	margin:3px;
+	color:#69635e;
+ 	font-size: 12px;
+ 	list-style: none;
+ 	width:170px;
+ 	height:170px;
+ }
+ 
+
+ 
+ .item_image{
+    background-color:#faf7f2;
+ 	width:165px;
+ 	height:170px;
+ }
+
+.SoldOut_image{
+	background-size: 165px 170px;
+	width:165px;
+	height:170px;
+} 
+ 
+ #item_empty{
+ 	list-style:none;
+ 	background-color:#faf7f2;
+	border:0px solid #e6e0d5;
+    font-weight : bold;
+	color:#69635e;
+ 	font-size: 20px;
+ 	text-align:center;
+ 	padding-top:80px;
+ 	width:800px;
+ 	height:120px;
+ }
+ .hidden_layer{
+ 	visibility: hidden;
+ 	position:absolute;
+ 	width:0px;
+ 	height:0px;
+ }
+ .hidden_form{
+    opacity:0.9;
+ 	background-color:#ff8040;
+ 	color:white;
+ 	position: relative;
+ 	display:block;
+ 	top:-5px;
+ 	left:-174px;
+ 	width:161px;
+ 	height:160px;
+ 	padding:5px;
+ 	margin: 5px;
+ }
+ 
+  .hidden_form > .item_name{
+   	width:100%;
+   	height:20%;
+    display:inline-block;
+    padding-top:10px;
+    font-weight:bold;
+    margin: 1px;
+    font-size:1.5em;
+    text-align:center;
+    border: none;
+    background-color: transparent;
+ }
+ 
+ .hidden_form > .minus,.hidden_form > .plus ,.hidden_form > .item_qty{
+    display:inline-block;
+    border:0px solid black;
+    background-color:transparent;
+    color:white;
+    margin: 1px;
+    font-size:1.6em;
+    font-weight:bold;
+    text-align:center;
+ 	width:25px;
+ 	height:15%;
+
+ }
+ 
+ 
+ 
+   .hidden_form > .item_price, .hidden_form > .item_add{
+    display:inline-block;
+    font-size:1.7em;
+    border:0px solid black;
+    background-color:transparent;
+    color:white;
+    margin: 1px;
+    text-align:center;
+    width:45%;
+    height:17%;
+ }
+ 
+    .hidden_form > .item_add:hover,.hidden_form > .item_add:hover,.hidden_form > .minus:hover,.hidden_form > .plus:hover,.hidden_form > .detail_view:hover{
+    background-color: #ffe4ca;
+    color:white;
+ }
+ 
+ 
+
+ 
+ 
+ 
+    .hidden_form > .detail_view{
+    display:inline-block;
+    border:0px solid black;
+    font-size:1.6em;
+    background-color:transparent;
+    color:white;
+    margin: 1px;
+    text-align:center;
+    width:80%;
+    height:17%;
+ }
+ 
+ .hidden_form > .item_num{
+ 	position:absolute;
+ 	width:0;
+ 	height:0;
+ 	visibility:hidden;
+ }

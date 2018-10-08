@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.item">
+	<select id="itemList" parameterType="int" resultType="itemDTO">
+	select * from item where i_category=#{i_category} order by item_num desc
+	</select>	
+	
+	<select id="getTotalA" parameterType="int" resultType="int">
+	SELECT count(*) FROM item where i_category=#{i_category}
+	</select>
+	
+	<insert id="itemAdd" parameterType="itemDTO"> 
+	 insert into item values(
+  #{i_category},seq_itemnum.nextval,#{item_name}, #{item_desc},#{item_image},#{item_price},0
+)
+	</insert>
+	
+	<!--상품 활성화/비활성화 목록-->
+	<select id="activationList" resultType="itemDTO">
+	select * from item order by item_num desc
+	</select>	
+	
+	<!--상품 활성화/비활성화 설정-->
+	<update id="activationChange" parameterType="java.util.Map">
+		update item set item_ongoing=#{item_ongoing} where item_num=#{item_num}
+	</update>
+		
+	<!-- 상품평 등록 -->
+	<insert id="reviewWrite" parameterType="reviewDTO">
+		insert into review values(
+			 #{m_id}, #{item_num}, #{content}, #{rate}, sysdate
+		)
+	</insert>
+	
+	
+	<select id="reviewList" parameterType="int" resultType="reviewDTO">
+		select m_id, item_num, content, rate, TO_CHAR(logtime, 'YYYY-MM-DD HH24:MI') as logtime from review where item_num=#{item_num}
+	</select>
+</mapper>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.faqMapper">
+
+	<select id="faqList" parameterType="java.util.Map" resultType="faqDTO">
+		<![CDATA[select faq_num,category_name, faq_subject, faq_content, faq_logtime, 
+		to_char(faq_logtime, 'YYYY.MM.DD')as faq_logtime from 
+		(select rownum rn, tt.* from 
+		(select * from faq order by faq_num desc) tt) 
+		where rn>=#{startNum} and rn<=#{endNum}]]>
+	</select>
+	
+	<select id="getCategory" resultType="category">
+		SELECT * FROM category
+	</select>
+	
+	<insert id="faqInsert" parameterType="faqDTO">
+		INSERT INTO faq VALUES(seq_faqnum.nextval, #{category_name},#{faq_subject},#{faq_content},sysdate)
+	</insert>
+	
+		<delete id="faqDelete" parameterType="int">
+		DELETE FROM faq WHERE faq_num = #{faq_num}
+	</delete>
+</mapper>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.qnaMapper">
+
+	<!-- 새 글 등록 -->
+	<insert id="insertQna" parameterType="qnaDTO">
+		INSERT INTO qna	VALUES(seq_qnanum.nextval, #{qna_type},'답변대기',#{qna_subject}, 
+		#{qna_content},#{m_id}, sysdate, '', '', #{qna_public}, 0)
+	</insert>
+	
+	
+	<!-- 답글 등록 -->
+	<update id="replyQna" parameterType="qnaDTO">
+		UPDATE qna SET qna_result='답변완료', qna_reply = #{qna_reply}, qna_redate=sysdate 
+		WHERE qna_num = #{qna_num}
+	</update>
+
+
+	<!-- 조회수 증가 -->
+	<update id="updateHit" parameterType="int">
+		UPDATE qna SET hit=hit+1 WHERE qna_num = #{qna_num}
+	</update>
+
+	
+	<!-- 내용 조회 -->
+	<select id="viewQna" parameterType="int" resultType="qnaDTO">
+		SELECT * from qna where qna_num=#{qna_num}
+	</select>
+	
+	
+	<!-- 전체 리스트 출력 (회원용)-->
+	<select id="qnaList" parameterType="java.util.Map" resultType="qnaDTO">
+		<![CDATA[
+		SELECT * from (select rownum rn, tt.* from (select * from qna order by qna_num desc) tt) 
+		where rn>=#{startNum} and rn<=#{endNum}	
+		]]>
+	</select>
+	
+	
+	<!-- 전체 리스트 출력 (관리자용 - 답변 안달린 글 & 먼저 등록된 글이 우선 출력됨)-->
+	<select id="qnaList_admin" parameterType="java.util.Map" resultType="qnaDTO">
+		<![CDATA[
+		SELECT * from (select rownum rn, tt.* from (select * from qna order by qna_result asc, qna_num asc) tt) 
+		where rn>=#{startNum} and rn<=#{endNum}
+		]]>
+	</select>
+	
+	
+	<!--전체 리스트 개수  -->
+	<select id="getQnalist" resultType="int">
+		SELECT COUNT(*) FROM qna
+	</select>
+	
+	
+	<!-- 글 삭제 -->
+	<delete id="deleteQna" parameterType="int">
+		DELETE FROM qna WHERE	qna_num=#{qna_num}
+	</delete>
+
+</mapper>

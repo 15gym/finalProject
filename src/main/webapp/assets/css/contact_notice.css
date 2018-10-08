@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+.notice table caption {
+	color: #69635e;
+	font-size: 30px;
+	font-weight: bold;
+	padding-bottom: 15px;
+	color: black;
+}
+
+.notice table {
+	background-color: #f9f3ec;
+	border-bottom: 1px solid #69635e;
+}
+
+.notice table th, .notice table td {
+	height: 24px;
+	padding: 15px 5px 16px 16px;
+	border-top: 1px solid #d9d4cc;
+	font-size: 14px;
+}
+
+.notice table th {
+	font-weight: 400;
+}
+
+.notice table td {
+	text-align: center;
+}
+
+.notice table tr:hover th, .notice table tr:hover td {
+	background-color: #e6e0d8;
+}
+
+.notice .data_tit a {
+	overflow: hidden;
+	display: block;
+	width: 100%;
+	text-align: left;
+	font-weight: 400;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.notice .notice_num {
+	padding: 21px 10px;
+	vertical-align: top;
+	text-align: center;
+}
+
+.notice .data_order a {
+	font-size: 12px;
+}
+
+.notice .notice_subject {
+	padding: 0;
+}
+
+.notice .notice_subject>a {
+	display: block;
+	padding: 4px 8px;
+	text-align: left;
+	*zoom: 1;
+}
+
+.notice .notice_subject>a:after {
+	display: block;
+	clear: both;
+	content: "";
+}
+
+.notice .notice_subject strong {
+	display: block;
+	padding: 9px 0 16px;
+	color: #69635e;
+	font-size: 24px;
+	text-align: center;
+}
+
+.notice .notice_subject .item_cont {
+	line-height: 24px;
+}
+
+.notice .notice_subject .thumbnail {
+	float: left;
+	margin-right: 30px;
+}
+
+.notice .notice_subject .thumbnail img {
+	display: block;
+}
+
+.notice .notice_logtime {
+	padding: 21px 16px;
+	vertical-align: bottom;
+	text-align: center;
+}

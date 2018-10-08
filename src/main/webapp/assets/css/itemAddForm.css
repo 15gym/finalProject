@@ -1,0 +1,123 @@
+@charset "UTF-8";
+/* *{
+	padding: 0;
+	margin: 10px;
+} */
+
+
+#itemAddForm_section{
+   	background-color:#e6e0d5;
+ 	min-height: 500px;
+ 	width:100%;
+ }
+
+ #itemAddForm_container{
+    text-align:center;
+	border:5px solid #faf7f2;
+  	background-color:#faf7f2;
+ 	width:890px;
+ 	min-height:500px;
+ 	margin:0 auto;
+ }
+
+#input, #result{
+	/**border: 5px solid #d5d5d5;*/
+	text-align: center;
+	min-width:850px;
+	font-weight: bold;
+}
+
+#input{
+	/**background: #e6e0d5;*/
+	padding: 5px;
+}
+
+#input:after{
+	content:'';
+	display: block;
+	float: none;
+	clear: both;
+}
+
+#input > input, #input > select, #input > div,
+#input > button, #input > div > button{
+	width : 99%;
+	text-align: center;
+	display: block;
+	font-size: 17px;
+	color: #222;
+	background: #e6e0d5;
+	border: 3px solid #e6e0d5;
+	margin: 5px auto;
+	padding: 5px 0;
+}
+#input > h3{
+	text-align: left;
+	margin:0;
+	padding: 10px 0 0 0;
+}
+
+#input > #category{
+	text-align: center;
+}
+
+
+#input > h3:before{
+	content: '';
+	display: block;
+	float: none;
+	clear: both;
+}
+
+#input > label{
+	margin: 0;
+	padding: 0;
+	display: block;
+	float: left;
+	padding-bottom: 10px;
+}
+
+#input > label > input {
+	width: auto !important;
+	display: inline;
+}
+
+h2{
+	padding-top: 10px;
+}
+#result{
+	padding: 50px;
+	font-size:17px;
+	color: #ac7c00;
+	background: #e6e0d5;
+	padding: 50px;
+}
+
+#input .myButton{
+	box-shadow: inset 0px 1px 0px 0px #e6e0d5;
+	background: linear-gradient(to bottom, #e6e0d5 5%, #997000 100%);
+	background-color: #ac7c00;
+	border-radius: 3px;
+	border:1px solid #e6e0d5;
+	display: inline-block;
+	color:white;
+	font-family: arial;
+	font-size: 15px;
+	font-weight: normal;
+	padding: 6px 24px;
+	text-decoration: none;
+	text-shadow: 2px 2px 0px black;
+}
+#input .myButton:hover{
+	background: linear-gradient(to bottom, #ac7c00 5%, #997000 100%);
+	background-color: #e6e0d5;
+}
+#input .myButton:active{
+	position: relative;
+	top: 1px;
+}
+
+
+
+
+
