@@ -7,6 +7,23 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+		
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import javax.crypto.Cipher;
+import java.security.KeyFactory;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.SecureRandom;
+import java.security.spec.RSAPublicKeySpec;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +38,12 @@ import member.controller.MemberService;
 
 @Controller
 public class AdminController {
+	private static final String SIGN_KEY = "ca2ke_n4icf";
+	
+	private static final int DEFAULT_KEY_SIZE = 2048;
+
+	private static final String KEY_FACTORY_ALGORITHM = "RSA";
+	
 	@Autowired
 	AdminService adminService;
 	@Autowired
@@ -34,8 +57,25 @@ public class AdminController {
 	}
 	//경로 테스트 /admin/ < 나중에 /main/변경
 	@RequestMapping(value="/admin/adminJoinForm")
-	public ModelAndView adminJoinForm() {
+	public ModelAndView adminJoinForm(HttpSession session) throws Exception {
+		KeyPair pair = generateKeyPair();
+		PublicKey publicKey = pair.getPublic();
+		PrivateKey privateKey = pair.getPrivate();
+
+		KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+	 
+		session.setAttribute("_RSA_WEB_Key_", privateKey);   
+
+		RSAPublicKeySpec publicSpec = (RSAPublicKeySpec) keyFactory.getKeySpec(publicKey, RSAPublicKeySpec.class);
+		String publicKeyModulus = publicSpec.getModulus().toString(16);
+		String publicKeyExponent = publicSpec.getPublicExponent().toString(16);
+						 
+													
+													
 		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("RSAModulus", publicKeyModulus);
+		modelAndView.addObject("RSAExponent", publicKeyExponent);	
+
 		//경로 테스트
 		modelAndView.addObject("display", "../admin/adminJoinForm.jsp");
 		modelAndView.addObject("tab", "admin_manager.jsp");
@@ -45,9 +85,17 @@ public class AdminController {
 	
 	//경로 테스트 /admin/ < 나중에 /main/변경
 	@RequestMapping(value="/admin/adminJoin")
-	public ModelAndView adminJoin(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView adminJoin(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		PrivateKey privateKey = (PrivateKey)session.getAttribute("_RSA_WEB_Key_");
+		session.removeAttribute("_RSA_WEB_Key_");
+		
+		String pwd = request.getParameter("a_pwd");
+		String a_pwd = decrypt(pwd, privateKey);
+		a_pwd += SIGN_KEY;
+		a_pwd = toSha256(a_pwd);
+        System.out.println("final hashed:::::::::::\n" + a_pwd);
+	
 		String a_id = request.getParameter("a_id");
-		String a_pwd= request.getParameter("a_pwd");
 		String a_name= request.getParameter("a_name");
 		
 		AdminDTO adminDTO = new AdminDTO();
@@ -247,4 +295,46 @@ public class AdminController {
 	      modelAndView.setViewName("../main/index.html");
 	      return modelAndView;
 	   }
+
+ 
+
+    public KeyPair generateKeyPair() throws NoSuchAlgorithmException {
+		KeyPairGenerator generator = KeyPairGenerator.getInstance(KEY_FACTORY_ALGORITHM);
+		generator.initialize(DEFAULT_KEY_SIZE, new SecureRandom());
+		KeyPair pair = generator.generateKeyPair();
+		return pair;
+	}
+
+	
+	
+
+
+	public String decrypt(String cipherText, PrivateKey privateKey) throws Exception {
+			byte[] bytes = new byte[cipherText.length() / 2]; 
+			for (int i = 0; i < bytes.length; i++) { 
+	 			bytes[i] = (byte) Integer.parseInt(cipherText.substring(2 * i, 2 * i + 2), 16); 
+ 			} 
+			Cipher cipher = Cipher.getInstance(KEY_FACTORY_ALGORITHM);
+			System.out.println(bytes.length);
+			cipher.init(Cipher.DECRYPT_MODE, privateKey);
+			return new String(cipher.doFinal(bytes));
+	}
+	
+	
+	private String toSha256(String str) throws Exception {
+		MessageDigest mdSHA256 = MessageDigest.getInstance("SHA-256");
+        mdSHA256.update(str.toString().getBytes("UTF-8"));
+        byte[] sha256Hash = mdSHA256.digest();
+        StringBuilder hexSHA256hash = new StringBuilder();
+        for(byte b : sha256Hash) {
+            String hexString = String.format("%02x", b);
+            hexSHA256hash.append(hexString);
+        }        
+        
+        return hexSHA256hash.toString();
+	}
+
+
+
+
 }

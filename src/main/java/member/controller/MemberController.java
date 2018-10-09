@@ -255,23 +255,51 @@ public class MemberController {
 		return modelAndView;
 	}
 	@RequestMapping(value="/main/modifyEditCheckForm")
-	public ModelAndView modifyEditCheckForm(HttpServletRequest request) {
+	public ModelAndView modifyEditCheckForm(HttpSession session, HttpServletRequest request) throws Exception {
+		KeyPair pair = generateKeyPair();
+		PublicKey publicKey = pair.getPublic();
+		PrivateKey privateKey = pair.getPrivate();
+
+		KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+	 
+		session.setAttribute("_RSA_WEB_Key_", privateKey);   
+
+		RSAPublicKeySpec publicSpec = (RSAPublicKeySpec) keyFactory.getKeySpec(publicKey, RSAPublicKeySpec.class);
+		String publicKeyModulus = publicSpec.getModulus().toString(16);
+		String publicKeyExponent = publicSpec.getPublicExponent().toString(16);
+						 
+													
+													
 		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("RSAModulus", publicKeyModulus);
+		modelAndView.addObject("RSAExponent", publicKeyExponent);
 		modelAndView.setViewName("../member/modifyEditCheckForm.jsp");
 		return modelAndView;
 		
 	}
 	// 회원정보수정 들어가기전에 비밀번호 폼만 만들어서 DTO에 있는 비밀번호와  텍스트비밀번호가 일치하는지 확인
 	@RequestMapping(value="/main/modifyEditCheck")
-	public ModelAndView modifyEditCheck(HttpServletRequest request) {
+	public ModelAndView modifyEditCheck(HttpSession session, HttpServletRequest request) throws Exception {
 		try {
 			request.setCharacterEncoding("UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String m_pwd = request.getParameter("m_pwd");
-		HttpSession session = request.getSession();
+		PrivateKey privateKey = (PrivateKey)session.getAttribute("_RSA_WEB_Key_");
+		session.removeAttribute("_RSA_WEB_Key_");
+		String pwd = request.getParameter("m_pwd");
+		System.out.println("pwd :::::::::::::::::::::::"+pwd);
+		pwd = decrypt(pwd, privateKey);
+		System.out.println(pwd);
+		String m_name = "";
+		
+		
+		pwd += SIGN_KEY;
+		pwd = toSha256(pwd);
+        	System.out.println("final hashed:::::::::::\n" + pwd);
+
+		String m_pwd = pwd;
 		String m_id =  (String) session.getAttribute("memId");
 		String memPwd = memberService.pwdCheck(m_id);
 		
@@ -286,7 +314,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/main/modifyForm")
-	public ModelAndView modifyForm(HttpServletRequest request) {
+	public ModelAndView modifyForm(HttpServletRequest request) throws Exception {
 		try {
 			request.setCharacterEncoding("UTF-8");
 		} catch (UnsupportedEncodingException e) {
@@ -294,9 +322,25 @@ public class MemberController {
 			e.printStackTrace();
 		}
 		HttpSession session = request.getSession();
+		KeyPair pair = generateKeyPair();
+		PublicKey publicKey = pair.getPublic();
+		PrivateKey privateKey = pair.getPrivate();
+
+		KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+	 
+		session.setAttribute("_RSA_WEB_Key_", privateKey);   
+
+		RSAPublicKeySpec publicSpec = (RSAPublicKeySpec) keyFactory.getKeySpec(publicKey, RSAPublicKeySpec.class);
+		String publicKeyModulus = publicSpec.getModulus().toString(16);
+		String publicKeyExponent = publicSpec.getPublicExponent().toString(16);
+						 
+													
+													
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("RSAModulus", publicKeyModulus);
+		modelAndView.addObject("RSAExponent", publicKeyExponent);
 		String memId = (String) session.getAttribute("memId");
 		MemberDTO memberDTO = memberService.modifyView(memId);
-		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("memberDTO", memberDTO);
 		modelAndView.addObject("display", "../member/modifyForm.jsp");
 		modelAndView.setViewName("../member/myPage.jsp");
@@ -304,15 +348,27 @@ public class MemberController {
 
 	}
 	@RequestMapping(value="/main/modify")
-	public ModelAndView modify(HttpServletRequest request) {
+	public ModelAndView modify(HttpServletRequest request) throws Exception {
 		try {
 			request.setCharacterEncoding("UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		HttpSession session = request.getSession();
+		PrivateKey privateKey = (PrivateKey)session.getAttribute("_RSA_WEB_Key_");
+		session.removeAttribute("_RSA_WEB_Key_");
+		String pwd = request.getParameter("m_pwd");
+		System.out.println("pwd :::::::::::::::::::::::"+pwd);
+		pwd = decrypt(pwd, privateKey);
+		System.out.println(pwd);
+		
+		pwd += SIGN_KEY;
+		pwd = toSha256(pwd);
+        	System.out.println("final hashed:::::::::::\n" + pwd);
+
 		String m_id = request.getParameter("m_id");
-		String m_pwd = request.getParameter("m_pwd");
+		String m_pwd = pwd;
 		String m_name = request.getParameter("m_name");
 		String m_phone = request.getParameter("m_phone");
 		String m_email = request.getParameter("m_email");
@@ -387,22 +443,45 @@ public class MemberController {
 		return modelAndView;
 	}
 	@RequestMapping(value="/main/deleteForm")
-	public ModelAndView deleteForm(HttpServletRequest request) {
+	public ModelAndView deleteForm(HttpServletRequest request, HttpSession session) throws Exception {
+		KeyPair pair = generateKeyPair();
+		PublicKey publicKey = pair.getPublic();
+		PrivateKey privateKey = pair.getPrivate();
+
+		KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+	 
+		session.setAttribute("_RSA_WEB_Key_", privateKey);   
+
+		RSAPublicKeySpec publicSpec = (RSAPublicKeySpec) keyFactory.getKeySpec(publicKey, RSAPublicKeySpec.class);
+		String publicKeyModulus = publicSpec.getModulus().toString(16);
+		String publicKeyExponent = publicSpec.getPublicExponent().toString(16);
+						 
+													
+													
 		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("RSAModulus", publicKeyModulus);
+		modelAndView.addObject("RSAExponent", publicKeyExponent);	
 		modelAndView.setViewName("../member/deleteForm.jsp");
 		return modelAndView;
 	}
 
 	//탈퇴
 	@RequestMapping(value="/main/delete")
-    public ModelAndView delete(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("[회원 탈퇴]");
-        String m_pwd = request.getParameter("m_pwd");
+    public ModelAndView delete(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	PrivateKey privateKey = (PrivateKey)session.getAttribute("_RSA_WEB_Key_");
+	session.removeAttribute("_RSA_WEB_Key_");
+	
+	String pwd = request.getParameter("m_pwd");
+        System.out.println("전송한 비밀번호: "+pwd);
+	String m_pwd = decrypt(pwd, privateKey);
+	m_pwd += SIGN_KEY;
+	m_pwd = toSha256(m_pwd);
+		
+	System.out.println("[회원 탈퇴]");
         System.out.println("입력한 비밀번호: "+m_pwd);
         
         //세션에서 아이디 추출
         String m_id = null;
-        HttpSession session = request.getSession();
         if (session.getAttribute("memId")!=null) {
             m_id = (String) session.getAttribute("memId");
         };

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="cart.bean.CartInDTO" alias="cartInDTO"/>
+		<typeAlias type="cart.bean.CartListDTO" alias="cartListDTO"/>
+		<typeAlias type="order.bean.OrderlistInDTO" alias="orderlistInDTO"/>
+		<typeAlias type="order.bean.OrderlistListDTO" alias="orderlistListDTO"/>
+		<typeAlias type="order.bean.OrderlistSalesDTO" alias="orderlistSalesDTO"/>
+		<typeAlias type="item.bean.ItemDTO" alias="itemDTO"/>
+		<typeAlias type="item.bean.ReviewDTO" alias="reviewDTO"/>
+		<typeAlias type="category.bean.CategoryDTO" alias="category"/>
+		<typeAlias type="member.bean.MemberDTO" alias="memberDTO"/>
+		<typeAlias type="admin.bean.AdminDTO" alias="adminDTO"/>
+		<typeAlias type="qna.bean.QnaDTO" alias="qnaDTO"/>
+		<typeAlias type="contact.bean.NoticeDTO" alias="noticeDTO"/>
+		<typeAlias type="contact.bean.FaqDTO" alias="faqDTO"/>
+	</typeAliases>
+
+	<mappers>
+		<mapper resource="mybatis/cart-mapping.xml"/>
+		<mapper resource="mybatis/member-mapping.xml"/>
+		<mapper resource="mybatis/orderlist-mapping.xml"/>
+		<mapper resource="mybatis/item_mapping.xml" />
+		<mapper resource="mybatis/category-mapping.xml"/>
+		<mapper resource="mybatis/admin-mapping.xml"/>
+		<mapper resource="mybatis/qna-mapping.xml"/>
+		<mapper resource="mybatis/faq-mapping.xml"/>
+		<mapper resource="mybatis/notice-mapping.xml"/>
+	</mappers>
+</configuration>

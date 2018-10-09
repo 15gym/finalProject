@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.cateMapper">
+
+	
+	<!--관리자 정보  -->
+	<select id="searchd" parameterType="String" resultType="adminDTO">
+		SELECT * FROM admin where a_id = #{a_id}
+	</select>
+
+	
+	<!--관리자 로그인  -->
+	<select id="adminLogin" parameterType="java.util.Map" resultType="String">
+		SELECT a_name FROM admin where a_id = #{a_id} and a_pwd = #{a_pwd}
+	</select>
+	<!--관리자 중복체크  -->
+	<select id="adminIdCheck" parameterType="String" resultType="String">
+      SELECT a_id FROM admin
+      WHERE a_id = #{a_id}
+	</select>
+	
+	<!-- 관리자 가입  -->
+	<insert id="adminJoin" parameterType="adminDTO">
+		INSERT INTO admin VALUES(seq_anum.nextval, #{a_name},#{a_id},#{a_pwd})
+	</insert>
+	
+	<!-- 관리자 목록 -->
+	<select id="adminList" resultType="adminDTO">
+		SELECT * FROM admin ORDER BY a_num
+	</select>
+	
+	
+	<!--회원리스트용  -->
+	<select id="memberList" parameterType="java.util.Map" resultType="memberDTO">
+		<![CDATA[select m_num, m_name, m_id, m_phone, m_email, 
+		to_char(m_logtime, 'YYYY.MM.DD')as m_logtime from 
+		(select rownum rn, tt.* from 
+		(select * from member order by m_num desc) tt) 
+		where rn>=#{startNum} and rn<=#{endNum}]]>
+	</select>	
+	
+	<select id="getTotalA"  resultType="int">
+		SELECT count(*) FROM member
+	</select>
+	
+	<select id="searchName" parameterType="java.util.Map" resultType="memberDTO">
+      <![CDATA[select m_num, m_name, m_id, m_phone, m_email, 
+		to_char(m_logtime, 'YYYY.MM.DD')as m_logtime from 
+		(select rownum rn, tt.* from 
+		(select * from member order by m_num desc) tt) 
+		where rn>=#{startNum} and rn<=#{endNum} and m_name= #{m_name}]]>
+	</select>
+	
+	<select id="searchId" parameterType="java.util.Map" resultType="memberDTO">
+     <![CDATA[select m_num, m_name, m_id, m_phone, m_email, 
+		to_char(m_logtime, 'YYYY.MM.DD')as m_logtime from 
+		(select rownum rn, tt.* from 
+		(select * from member order by m_num desc) tt) 
+		where rn>=#{startNum} and rn<=#{endNum} and m_id= #{m_id}]]>
+	</select>
+</mapper>

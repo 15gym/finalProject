@@ -1,0 +1,86 @@
+@charset "utf-8";
+/*
+ * 파일명 : BuyList.css
+ * 기능설명: 컨텐츠 스타일
+ * 작성자 : 백경호
+ * 최종수정일 :	2018-09-13
+ */
+ .buyList{
+ 	padding-left:710px;
+ 	height:500px;
+    text-align:center;
+
+ }
+ 
+ 
+ .buyList .plus,.buyList .minus,.buyList .delete{
+    display:inline-block;
+    background-color: #ffb468;
+    border-left:2px solid white;
+    border-top:2px solid white;
+    border-bottom:2px solid #ffce9d;
+    border-right:2px solid #ffce9d;
+    color:#fff2e6;
+    margin: 1px;
+    font-size:1.0em;
+    text-align:center;
+    vertical-align:center;
+ 	width:30px;
+ 	height:30px;
+ }
+ 
+ 
+ 
+ .buyList li{
+ 	list-style: none;
+ 	margin-bottom: 3px;
+ }
+ 
+ .buyList #item_qty{
+ 	display:inline-block;
+ 	width:36%;
+ 	height:21px;	
+ }
+
+#addButton{
+	text-align:center;
+ 	border:1px solid #ffb497;
+ 	width: 140px;
+ 	padding: 0px;
+}
+ 
+ .buyButton{
+    text-align:center;
+ 	border:1px solid #ffb497;
+ 	width: 140px;
+ 	margin: 2px;
+ 	padding: 0px;
+ }
+ 
+
+ .buyList .item_name{
+ 	text-align:center;
+ 	border:1px solid #ffb497;
+ 	width: 110px;
+ 	height:21px;
+ 	margin: 2px;
+ 	padding: 0px;
+ }
+ 
+ .buyList  .item_qty{
+ 	text-align:center;
+ 	border:1px solid #ffb497;
+ 	width: 140px;
+ 	margin: 2px;
+ 	padding: 0px;
+ }
+ 
+ .buyList .item_price{
+ 	text-align:center;
+ 	border:1px solid #ffb497;
+ 	width: 110px;
+ 	height:21px;	
+ 	margin: 2px;
+ 	padding: 0px;
+ }
+ 

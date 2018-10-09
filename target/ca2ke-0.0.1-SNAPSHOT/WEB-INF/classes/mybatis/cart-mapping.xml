@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.cartMapper">
+
+	<!-- 장바구니 추가  -->
+	<insert id="addCart" parameterType="cartInDTO">
+		INSERT INTO cart VALUES (seq_cartnum.nextval, #{m_id}, 
+		#{item_num},#{item_qty},((select item_price from item where item_num=#{item_num})*#{item_qty}),
+		sysdate, #{p_store},#{p_request_date}, #{p_request_time})
+	</insert>
+	
+	<!-- 장바구니 수정 (=개수 수정) -->
+	<update id="updateCart" parameterType="java.util.Map">
+		UPDATE cart SET item_qty=#{item_qty}, item_tot=((select item_price from item where item_num=#{item_num})*#{item_qty}) WHERE cart_num = #{cart_num}
+	</update>
+	
+	<!-- 장바구니 삭제 -->
+	<delete id="deleteCart" parameterType="int">
+		DELETE FROM cart WHERE cart_num = #{cart_num}
+	</delete>
+
+	<!-- 장바구니 1개 가져오기 (출력용) -->
+	<select id="getCart" parameterType="int" resultType="cartListDTO">
+		SELECT * FROM cart natural join item where cart_num = #{cart_num}
+	</select>
+
+	<!-- 장바구니 목록 가져오기 (출력용) -->
+	<select id="listCart" parameterType="java.lang.String" resultType="cartListDTO">
+		SELECT * FROM cart natural join item where m_id = #{m_id}
+	</select>
+	
+	<!-- 장바구니 목록 가져오기 (결제 시 오더리스트에 복사하는 용도) -->
+	<select id="listCart_order" parameterType="java.lang.String" resultType="cartInDTO">
+		SELECT * FROM cart where m_id = #{m_id}
+	</select>
+	
+	<!-- 아이디별 장바구니 개수  -->
+	<select id="totalCart" parameterType="java.lang.String" resultType="int">
+		SELECT COUNT(*) FROM cart WHERE m_id=#{m_id}
+	</select>
+
+</mapper>

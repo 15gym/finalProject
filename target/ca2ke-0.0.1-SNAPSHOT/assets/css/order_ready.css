@@ -1,0 +1,161 @@
+@charset "UTF-8";
+
+.container {
+	width: 1000px;
+	min-width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+} 
+
+.inner {
+	background-color: white;
+}
+h2{
+	margin-left: 10%;
+	padding-top: 10px;
+	margin-bottom: 10px;
+}
+
+.cart_table {
+	background-color: #fff;
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	border-collapse: collapse;
+	border: 1px solid #ddd !important;
+}
+
+.cart_table th {
+	padding: 10px 0;
+	background-color: #eee;
+}
+
+.cart_table td {
+	border: 1px solid #ddd;
+	background-color: #fff;
+	text-align: center;
+	vertical-align: middle;
+	padding: 5px 0;
+}
+
+
+.cart_table img {
+	width: 50%;
+	display: inline-block;
+}
+
+.cart_table .sum_cart {
+	text-align: right;
+	margin-bottom: 50px;
+	padding: 10px 20px;
+	background-color: #eee;
+	font-weight: bold;
+	font-size: 1.3em;
+}
+
+.btn-bordered{
+	width: 100px;
+	height: 30px;
+	font-weight: bold;
+	font-size: 0.7em;
+	margin-left: 30px;
+	padding: 0;
+	color: #808080;
+}
+
+.btn-bordered:hover{
+	background-color: #ffb497;
+}
+
+div#orderInfo{
+	margin-left: 10%;
+}
+
+div#orderInfo label{
+	margin-left: 1em;
+	display: inline-block;
+	width: 150px;
+	font-weight: bold;
+	height: 2em;
+}
+
+div#payment{
+	margin-left: 10%;
+}
+
+div#payment label{
+	margin-left: 1em;
+	display: inline-block;
+	width: 150px;
+	font-weight: bold;
+	height: 2em;
+}
+
+#card table, #account table{
+	margin-top: 10px;
+	border-collapse: collapse;
+}
+#card table tr, #account table tr{
+	border-bottom: 1px solid #eee;
+}
+#card table th, #account table th{
+	width: 200px;
+}
+
+#card table label{
+	font-weight: normal;
+}
+
+#card table select, #account table select{
+	display: inline-block;
+	margin-left: 10px;
+	width: 150px;
+	padding: 0px;
+}
+
+#account table td#accountNotice{
+	height: 40px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+#account span{
+	font-weight: bold;
+	color: darkred;
+}
+
+div#payment label#orderCheck{
+	display: inline-block;
+	width: 300px;
+	margin-left: 35%;
+	margin-top: 30px;
+	margin-bottom: 20px;
+	font-size: 1.3em;	
+}
+
+.btn-primary{
+	margin-left: 30%;
+	width: 200px;
+}
+.btn-default{
+	width: 200px;
+}
+.btn-primary:hover {
+	color: #fff;
+	background-color: #ff9c87;
+	border-color: #ff9c87;
+}
+.btn-primary.focus, .btn-primary:focus {
+	box-shadow: 0 0 0 3px rgba(255, 153, 86, .5)
+}
+.btn-primary.active, .btn-primary:active, .show>.btn-primary.dropdown-toggle
+	{
+	background-color: #ff9c87;
+	background-image: none;
+	border-color:#ff9c87;
+}
+.btn-default:hover, .btn-default:focus{
+	color: #fff;
+	background-color: #c0c0c0;
+	border-color: #c0c0c0;
+	
+}

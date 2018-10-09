@@ -1,0 +1,461 @@
+@charset "UTF-8";
+
+/* Jia Hur - 문의사항 */
+/*1)페이징용 버튼  */
+.btn {
+	display: inline-block;
+	font-weight: 400;
+	text-align: center; 
+	white-space: nowrap;
+	vertical-align: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	border: 1px solid transparent;
+	padding: .5rem 0; /* .75rem; */
+	font-size: 1rem;
+	line-height: 1.25;
+	border-radius: .25rem;
+	transition: all .15s ease-in-out
+}
+
+.btn:focus, .btn:hover {
+	text-decoration: none
+}
+
+.btn.focus, .btn:focus {
+	outline: 0;
+	box-shadow: 0 0 0 3px rgba(0, 123, 255, .25)
+}
+
+.btn-group, .btn-group-vertical {
+	position: relative;
+	display: -ms-inline-flexbox;
+	display: inline-flex;
+	vertical-align: middle;
+	margin-left: 48%;
+	margin-bottom: 100px;
+}
+
+.btn-group .btn+.btn, .btn-group .btn+.btn-group, .btn-group .btn-group+.btn,
+	.btn-group .btn-group+.btn-group, .btn-group-vertical .btn+.btn,
+	.btn-group-vertical .btn+.btn-group, .btn-group-vertical .btn-group+.btn,
+	.btn-group-vertical .btn-group+.btn-group {
+	margin-left: -1px
+}
+
+
+
+.btn-secondary {
+	color: #fff;
+	background-color: #868e96;
+	border-color: #868e96;
+	width: 30px !important;
+	height: 35px !important;
+}
+
+.btn-secondary:hover {
+	color: #fff;
+	background-color: #727b84;
+	border-color: #6c757d
+}
+
+.btn-secondary.focus, .btn-secondary:focus {
+	box-shadow: 0 0 0 3px rgba(134, 142, 150, .5)
+}
+
+.btn-secondary.disabled, .btn-secondary:disabled {
+	background-color: #868e96;
+	border-color: #868e96
+}
+
+.btn-secondary.active, .btn-secondary:active, .show>.btn-secondary.dropdown-toggle
+	{
+	background-color: #727b84;
+	background-image: none;
+	border-color: #6c757d
+}
+ .currentPaging{
+	background-color: #ffb497;
+	border-color:#ffb497;
+}
+.currentPaging:hover, .currentPaging:active{
+	background-color: #ff9c87;
+	border-color:#ff9c87;
+}
+.currentPaging:focus {
+	box-shadow: 0 0 0 3px rgba(255, 153, 86, .5)
+}
+
+
+
+/*엑셀 버튼용*/
+.btn-success {
+	color: #fff;
+	background-color: #28a745;
+	border-color: #28a745;
+	padding: 4px;
+}
+
+.btn-success:hover {
+	color: #fff;
+	background-color: #218838;
+	border-color: #1e7e34
+}
+
+.btn-success.focus, .btn-success:focus {
+	box-shadow: 0 0 0 3px rgba(40, 167, 69, .5)
+}
+
+.btn-success.disabled, .btn-success:disabled {
+	background-color: #28a745;
+	border-color: #28a745
+}
+
+.btn-success.active, .btn-success:active, .show>.btn-success.dropdown-toggle
+	{
+	background-color: #218838;
+	background-image: none;
+	border-color: #1e7e34
+}
+
+
+
+/*2. 목록 테이블  */
+.table-hover, .table-striped {
+	width: 95%;
+	margin: 0 auto;
+	border-collapse: collapse !important;
+}
+
+
+.table td, .table th {
+	background-color: #fff !important;
+}
+
+.table-bordered tr {
+	border: 1px solid #ddd !important
+}
+
+.table-hover thead tr, .table-striped thead tr{
+	background-color: #727b84;
+	color: white;
+	height: 40px;
+}
+.table-hover thead tr th, .table-striped thead tr th{
+	padding: 3px 10px;
+	text-align: center;
+}
+.table-hover tbody tr, .table-striped tbody tr{
+	font-weight: normal;
+	text-align: center;
+}
+.table-hover tbody tr:hover {
+	background-color: rgba(0, 0, 0, .075);
+}
+.table-hover tbody tr td, .table-striped tbody tr td{
+	padding: 10px 0;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+	background-color: rgba(0, 0, 0, .05)
+}
+
+.table-striped tfoot tr td{
+	text-align: center;
+	padding: 10px 0;
+	font-weight: bold;
+	border: 1px solid rgba(0, 0, 0, .075);
+}
+
+.table-striped tfoot .tot{
+	background-color: #868e96;
+	color: white;
+}
+
+/*QNA 목록 각 column별 폭*/
+div#qnalist table tbody tr{
+	background-color: white;
+}
+div#qnalist #col1{
+	width: 5%;
+}
+div#qnalist #col2{
+	width: 10%;
+}
+div#qnalist #col3{
+	width: 10%;
+}
+
+div#qnalist #col5{
+	width: 10%;
+}
+div#qnalist #col6{
+	width: 10%;
+}
+div#qnalist #col7{
+	width: 10%;
+}
+
+div#qnalist td#subject{
+	padding-left: 20px;
+	text-align: left; 
+}
+
+div#qnalist td.text{
+	color: #808080;
+	font: 0.9em gothic;
+	font-weight: bold;
+}
+div#qnalist td#subject a{
+	color: black;
+	font-weight: bold;
+}
+
+
+
+/* - [문의글 등록]버튼*/
+.btn-primary {
+	color: #fff;
+	background-color: #007bff;
+	border-color: #007bff;
+	margin-top: 30px;
+	margin-left: 30px;
+	padding: 5px;
+	width: 150px;
+}
+
+.btn-primary:hover {
+	color: #fff;
+	background-color: #0069d9;
+	border-color: #0062cc
+}
+
+.btn-primary.focus, .btn-primary:focus {
+	box-shadow: 0 0 0 3px rgba(0, 123, 255, .5)
+}
+
+.btn-primary.disabled, .btn-primary:disabled {
+	background-color: #007bff;
+	border-color: #007bff
+}
+
+.btn-primary.active, .btn-primary:active, .show>.btn-primary.dropdown-toggle
+	{
+	background-color: #0069d9;
+	background-image: none;
+	border-color: #0062cc
+}
+
+
+
+/* 문의글 입력폼 */
+#qnaWrite{
+	background-color: white;
+}
+#qnaWrite h2{
+	margin-left: 180px;
+}
+#qnaWriteTable{
+	border-collapse: collapse;
+	margin: 10px auto;
+	width: 800px;
+}
+#qnaWriteTable tr{
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+#qnaWriteTable th{
+	width: 150px;
+	background-color: #eee;
+}
+
+#qnaWriteTable td{
+	padding: 0px 10px;
+}
+
+#qnaWriteTable td input[type=text]{
+	width: 400px;
+	padding: 5px;
+	border: 2px solid #eee;
+}
+
+#qnaWriteTable td input[type=text]:focus, #qnaWriteTable td input[type=text]:hover {
+	border: 2px solid #ffb497;
+}
+#qnaWriteTable select{
+	padding: 4px;
+	width: 200px;
+	border: 2px solid #eee;
+}
+#qnaWriteTable select:hover, #qnaWriteTable select:active{
+	border: 2px solid #ffb497;
+}
+#qnaWriteTable label{
+	display: inline-block;
+	width: 100px;
+	padding: 5px;
+}
+
+div#qnaWrite .btn-default{
+	width: 200px;
+	background-color: #ccc;
+}
+div#qnaWrite input[type=button] {
+	background-color: #0080ff;
+	margin-left: 400px;
+}
+
+
+
+/*문의글 상세보기*/
+#qnaDetail{
+	background-color: white;
+}
+#qnaDetail h2{
+	margin-left: 180px;
+}
+#qnaDetailTable{
+	border-collapse: collapse;
+	margin: 10px auto;
+	width: 800px;
+}
+#qnaDetailTable tr{
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	height: 40px;
+	padding: 5px;
+}
+#qnaDetailTable tr#content{
+	height: 150px;
+}
+#qnaDetailTable th{
+	width: 150px;
+	background-color: #eee;
+}
+
+#qnaDetailTable td{
+	padding: 5px 10px;
+	word-break:break-all;
+}
+
+div#btnDiv{
+	width: 800px;
+	margin: 0 auto;
+	text-align: center;
+}
+div#qnaDetail .btn-default{
+	width: 200px;
+	background-color: #ccc;
+}
+div#qnaDetail #deleteBtn{
+	background-color: #ff8000;
+	font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*QNA 관리자용 목록*/
+div#qnalist_admin .table-hover tbody tr td, .table-striped tbody tr td{
+	padding: 3px 0;
+	word-break:break-all;
+}
+div#qnalist_admin #col1{
+	width: 5%;
+}
+div#qnalist_admin #col2{
+	width: 5%;
+}
+div#qnalist_admin #col3{
+	width: 10%;
+}
+
+div#qnalist_admin #col5{
+	width: 10%;
+}
+div#qnalist_admin #col6{
+	width: 15%;
+}
+div#qnalist_admin #col7{
+	width: 10%;
+}
+
+div#qnalist_admin td#subject{
+	padding-left: 20px;
+	text-align: left; 
+}
+
+div#qnalist_admin td.text{
+	color: #808080;
+	font: 0.9em gothic;
+	font-weight: bold;
+}
+
+div#qnalist_admin #replyFormBtn{
+	background: #ff8080;
+}
+
+
+/*관리자 답변 등록폼*/
+#qnaReply h2{
+	margin-left: 300px;
+}
+#qnaReplyTable{
+	border-collapse: collapse;
+	margin: 10px auto;
+	width: 800px;
+}
+#qnaReplyTable tr{
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	height: 40px;
+	padding: 5px;
+}
+#qnaReplyTable tr#content{
+	height: 150px;
+}
+#qnaReplyTable th{
+	text-align: center;
+	width: 150px;
+	background-color: #eee;
+}
+
+#qnaReplyTable td{
+	padding: 5px 10px;
+}
+
+div#btnDiv{
+	width: 800px;
+	margin: 0 auto;
+	text-align: center;
+}
+div#qnaReply .btn-default{
+	width: 200px;
+	background-color: #ccc;
+}
+div#qnaReply #replyBtn{
+	background-color: #0080ff;
+	font-weight: bold;
+	color: white;
+}
+div#qnaReply #deleteBtn{
+	background-color: #ff8000;
+	font-weight: bold;
+	color: white;
+}
+
+
+
+/*관리자 QNA 내용 확인폼*/
+#qnaDetail h2#qnaDetail_admin{
+	margin-left: 300px;
+}

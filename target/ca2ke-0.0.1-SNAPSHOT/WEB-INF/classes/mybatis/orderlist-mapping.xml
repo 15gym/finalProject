@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.orderlistMapper">
+
+	<!-- 오더리스트 등록  (sql문 2개 필요)-->
+	<insert id="addOrderlist1" parameterType="orderlistInDTO">
+		INSERT INTO orderlist (o_num, o_date, cart_num, m_id, payment, o_status)
+		VALUES (seq_onum.nextval, sysdate, #{cart_num},#{m_id},#{payment},#{o_status})
+	</insert>	
+	
+	<update id="addOrderlist2" parameterType="cartInDTO">
+		UPDATE orderlist	SET
+		(p_request_date, p_request_time,p_store,item_qty,item_num,item_tot) 
+		= (select p_request_date, p_request_time, p_store, item_qty, item_num, item_tot 
+		from cart where cart_num=#{cart_num}) where cart_num=#{cart_num}
+	</update>
+	
+	
+	
+	<!-- 준비현황 업데이트  -->
+	<update id="updateStatus" parameterType="java.util.Map">
+		UPDATE orderlist SET o_status=#{o_status} where o_num=#{o_num}
+	</update>
+	
+	<!-- 주문 취소시 아이템 수량 / 총액 0으로 변경 -->
+	<update id="orderCancel">
+		UPDATE orderlist set item_qty=0, item_tot=0, o_status=0 where o_num=#{o_num}
+	</update>
+	
+	<!-- 주문완료 & 픽업 시간 업데이트 -->
+	<update id="pickup" parameterType="int">
+		UPDATE orderlist set p_actual_time=(SELECT TO_CHAR(SYSDATE, 'HH24:MI:SS') FROM DUAL), 
+		o_status=6 where o_num=#{o_num}
+	</update>
+	
+	
+
+	
+	
+	
+	<!-- 오더리스트 중 완료된 주문 목록 가져오기 -->
+	<select id="orderlist_fin" parameterType="java.util.Map" resultType="orderlistListDTO">
+		<![CDATA[
+		SELECT * from (select rownum rn, tt.* from (select * from orderlist NATURAL JOIN item NATURAL JOIN 
+		member NATURAL JOIN status where o_status = 6	order by o_date desc) tt)
+		where rn>=#{startNum} and rn<=#{endNum}		
+		]]>
+	</select>
+	
+	<!-- 오더리스트 중 완료된 주문 목록 개수 가져오기 -->
+	<select id="getOrderlist_fin" resultType="int">
+		SELECT COUNT(*) FROM orderlist where  o_status = 6
+	</select>
+	
+	<!-- 완료된 주문 총액 -->
+	<select id="orderTot" resultType="int">
+		select sum(item_tot) from orderlist where o_status=6
+	</select>
+
+	
+	
+	
+	<!-- 오더리스트 중 완료되지 않은 주문 목록 가져오기 (픽업 날짜/시간 순/준비현황 순 정렬)-->
+	<select id="orderlist_ing" parameterType="java.util.Map" resultType="orderlistListDTO">
+		<![CDATA[
+		SELECT * from (select rownum rn, tt.* from (select * from orderlist NATURAL JOIN item NATURAL JOIN 
+		member NATURAL JOIN status where o_status > 0 and o_status < 6 order by p_request_date desc, p_request_time desc, o_status) tt) 
+		where rn>=#{startNum} and rn<=#{endNum}
+		]]>
+	</select>
+	
+	<!-- 오더리스트 중 완료되지 않은 주문 목록 개수 가져오기 -->
+	<select id="getOrderlist_ing" resultType="int">
+		<![CDATA[
+		SELECT COUNT(*) FROM orderlist where  o_status > 0 and o_status < 6
+		]]>
+	</select>
+	
+	<!-- 오더리스트 중 완료되지 않은 주문 목록 전체 가져오기 (페이징x) -->
+	<select id="orderlist_ing_all" resultType="orderlistListDTO">
+		<![CDATA[
+		SELECT * from (select rownum rn, tt.* from (select * from orderlist NATURAL JOIN item NATURAL JOIN 
+		member NATURAL JOIN status where o_status > 0 and o_status < 6 order by p_request_date desc, p_request_time desc, o_status) tt) 
+		]]>
+	</select>
+	
+
+	
+	
+	
+	<!-- 오더리스트 목록 가져오기 - 특정 아이디 기준-->
+	<select id="orderlist_id" parameterType="java.util.Map" resultType="orderlistListDTO">
+		<![CDATA[
+		SELECT * from (select rownum rn, tt.* from (select * from orderlist NATURAL JOIN item NATURAL JOIN 
+		member NATURAL JOIN status where m_id=#{m_id} order by o_date desc) tt)
+		where rn>=#{startNum} and rn<=#{endNum}
+		]]>
+	</select>
+	
+	<!-- 아이디별 구매 건 수 가져오기 -->
+	<select id="getOrderlist_id" parameterType="java.lang.String" resultType="int">
+		SELECT COUNT(*) FROM orderlist where m_id=#{m_id}
+	</select>
+	
+	
+	
+
+
+
+	
+	<!-- 이번달 구매 횟수 -->
+	<select id="thisMonthCount" parameterType="String" resultType="int">
+		<![CDATA[
+		select count(*) from orderlist where m_id=#{m_id} and o_status>0 and o_date > (SELECT to_char(trunc(sysdate,'mm'),'yyyy-mm-dd') FROM dual) 
+		and o_date < (SELECT to_char(trunc(add_months(sysdate, + 1),'mm') ,'yyyy-mm-dd') FROM dual)  
+		]]>
+	</select>
+
+	<!-- 지난달 구매 횟수 -->
+	<select id="prevMonthCount" parameterType="String" resultType="int">
+		<![CDATA[
+		select count(*) from orderlist where m_id=#{m_id} and o_status>0 and o_date > (SELECT to_char(trunc(add_months(sysdate, -1), 'mm'),'yyyy-mm-dd') FROM dual) 
+		and o_date < (SELECT to_char(trunc(sysdate, 'mm') ,'yyyy-mm-dd') FROM dual)
+		]]>
+	</select>
+
+	<!-- 지지난달 구매 횟수 -->
+	<select id="prevMonthCount2" parameterType="String" resultType="int">
+		<![CDATA[
+		select count(*) from orderlist where m_id=#{m_id} and o_status>0 and o_date > (SELECT to_char(trunc(add_months(sysdate, -2), 'mm'),'yyyy-mm-dd') FROM dual) 
+		and o_date < (SELECT to_char(trunc(add_months(sysdate, -1), 'mm') ,'yyyy-mm-dd') FROM dual)
+		]]>
+	</select>	
+	
+
+
+
+	
+		<!-- 오더리스트 중 완료된 주문 목록 가져오기 - 동적 sql-->
+	<select id="salesList" parameterType="java.util.Map" resultType="orderlistListDTO">
+		SELECT * from (select rownum rn, tt.* from (select * from orderlist NATURAL JOIN item NATURAL JOIN 
+		member NATURAL JOIN status WHERE o_status = 6	
+		
+		<if test="category != 0">
+			AND i_category = #{category}
+		</if>
+			
+		<if test="item_num != 0">
+			AND item_num = #{item_num}
+		</if>
+		
+		<if test="payment == 1">
+			AND payment = '카드'
+		</if>
+		
+		<if test="payment == 2">
+			AND payment = '현금'
+		</if>
+		
+		<if test="date1 != ''">
+			AND o_date BETWEEN to_date(#{date1},'yyyy-mm-dd') and to_date(#{date2},'yyyy-mm-dd')+1
+		</if>
+		
+		<if test='m_id != "" '>
+			AND m_id LIKE '%'||#{m_id}||'%'
+		</if>
+		
+		<if test="o_num != 0">
+			AND o_num = #{o_num}
+		</if>
+		
+		<![CDATA[
+		order by o_date desc) tt)	where rn>=#{startNum} and rn<=#{endNum}		
+		]]>
+	</select>
+
+
+	<!-- 조건 별 구매 건 수 가져오기 -->
+	<select id="getSalesList" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM orderlist natural join item natural join member natural join status where o_status=6
+		
+		<if test="category != 0">
+			AND i_category = #{category}
+		</if>
+			
+		<if test="item_num != 0">
+			AND item_num = #{item_num}
+		</if>
+		
+		<if test="payment == 1">
+			AND payment = '카드'
+		</if>
+		
+		<if test="payment == 2">
+			AND payment = '현금'
+		</if>
+		
+		<if test="date1 != ''">
+			AND o_date BETWEEN to_date(#{date1},'yyyy-mm-dd') and to_date(#{date2},'yyyy-mm-dd')+1
+		</if>
+		
+		<if test='m_id != "" '>
+			AND m_id LIKE '%'||#{m_id}||'%'
+		</if>
+		
+		<if test="o_num != 0">
+			AND o_num = #{o_num}
+		</if>
+		
+	</select>
+
+
+	<!-- 조건 별 총 액 가져오기 -->
+	<select id="salesTot" parameterType="java.util.Map" resultType="int">
+		select sum(item_tot) FROM orderlist natural join item natural join member natural join status where o_status=6
+		
+		<if test="category != 0">
+			AND i_category = #{category}
+		</if>
+			
+		<if test="item_num != 0">
+			AND item_num = #{item_num}
+		</if>
+		
+		<if test="payment == 1">
+			AND payment = '카드'
+		</if>
+		
+		<if test="payment == 2">
+			AND payment = '현금'
+		</if>
+		
+		<if test="date1 != ''">
+			AND o_date BETWEEN to_date(#{date1},'yyyy-mm-dd') and to_date(#{date2},'yyyy-mm-dd')+1
+		</if>
+		
+		<if test='m_id != "" '>
+			AND m_id LIKE '%'||#{m_id}||'%'
+		</if>
+		
+		<if test="o_num != 0">
+			AND o_num = #{o_num}
+		</if>
+		
+	</select>
+	
+	
+	<!-- 오더리스트 중 완료된 주문 목록 가져오기 (전체 목록, 페이징x)- 동적 sql-->
+	<select id="salesList_all" parameterType="java.util.Map" resultType="orderlistListDTO">
+		SELECT * from (select rownum rn, tt.* from (select * from orderlist NATURAL JOIN item NATURAL JOIN 
+		member NATURAL JOIN status WHERE o_status = 6	
+		
+		<if test="category != 0">
+			AND i_category = #{category}
+		</if>
+			
+		<if test="item_num != 0">
+			AND item_num = #{item_num}
+		</if>
+		
+		<if test="payment == 1">
+			AND payment = '카드'
+		</if>
+		
+		<if test="payment == 2">
+			AND payment = '현금'
+		</if>
+		
+		<if test="date1 != ''">
+			AND o_date BETWEEN to_date(#{date1},'yyyy-mm-dd') and to_date(#{date2},'yyyy-mm-dd')+1
+		</if>
+		
+		<if test='m_id != "" '>
+			AND m_id LIKE '%'||#{m_id}||'%'
+		</if>
+		
+		<if test="o_num != 0">
+			AND o_num = #{o_num}
+		</if>
+		
+		<![CDATA[
+		order by o_date desc) tt)	
+		]]>
+	</select>
+	
+	
+	
+	
+	
+	<!-- 일별 매출 목록 -->
+	<select id="dailySales" parameterType="java.util.Map" resultType="orderlistSalesDTO">
+		<![CDATA[
+		select sum(item_tot) as dailySales, to_char(o_date,'yyyy-mm-dd') as o_date from orderlist 
+		where o_date>=#{startDate} and o_date<=#{endDate} and o_status=6 group by to_char(o_date,'yyyy-mm-dd')
+		]]>
+	</select>
+	
+	
+</mapper>

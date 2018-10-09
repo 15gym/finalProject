@@ -1,0 +1,89 @@
+@charset "utf-8";
+
+/* Reset */
+html {
+    min-height: 100%;
+}
+body {
+    -webkit-text-size-adjust: none;
+}
+body, div, p, table, th, td, ul, ol, li, dl, dt, dd, form, input, select, textarea, button, h1, h2, h3, h4, h5, img {
+    margin: 0;
+    padding: 0;
+}
+body, p, th, td, input, button, select, textarea {
+    font-family: 'NanumBarunGothic', 'Malgun Gothic', Dotum, Arial, sans-serif;
+    /*line-height: 1;*/
+}
+input, select, textarea {
+    vertical-align: middle;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    box-shadow: none;
+}
+textarea {
+    border-radius:0;
+    box-shadow: none;
+}
+input {
+    border-radius: 0;
+}
+input::-ms-clear, input::-ms-reveal {
+    display: none;
+}
+input::-webkit-search-cancel-button {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+input::-webkit-clear-button, input::-webkit-inner-spin-button, input::-webkit-outer-spin-button {
+    display: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+button {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    cursor: pointer;
+    outline: none;
+}
+textarea {
+    resize: none;
+}
+label {
+    vertical-align: middle;
+    cursor: pointer;
+}
+a {
+    text-decoration: none;
+    outline: none;
+}
+em, address {
+    font-style: normal;
+}
+ol, ul {
+    list-style: none;
+}
+img {
+    border: 0;
+	/*max-width:100%;*/
+}
+table {
+    width: 100%;
+    border: 0;
+    border-spacing: 0;
+    border-collapse: separate;
+}
+caption {
+    visibility: hidden; 
+    text-indent: -10000em; 
+    font-size: 0; 
+    line-height: 0;
+}
+
+/* Common */
+.clearfix:after {
+    display: block;
+    content: '';
+    clear: both;
+}
