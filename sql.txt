@@ -1,0 +1,228 @@
+﻿--FINAL PROJECT (CA2KE)
+
+--회원DB & 시퀀스
+
+create table member (
+  m_num number primary key,
+  m_name varchar2(30) not null, 
+  m_id varchar2(30) unique, 
+  m_pwd varchar2(100) not null,
+  m_phone varchar2(30) not null, 
+  m_email varchar2(100) unique,
+  m_logtime date
+);
+create sequence seq_mnum nocycle nocache;
+
+ 
+
+ 
+
+ 
+
+--관리자DB & 시퀀스
+
+create table admin (
+  a_num number primary key, 
+  a_name varchar2(30) not null, 
+  a_id varchar2(30) unique, 
+  a_pwd varchar2(100) not null 
+);
+create sequence seq_anum nocycle nocache;
+
+
+ 
+
+ 
+
+--카테고리 DB &  시퀀스
+
+create table category (
+  i_category number primary key, 
+  category_name varchar2(30) not null, 
+  category_image varchar2(100),          
+  category_ongoing number default 0  
+);
+create sequence seq_category nocycle nocache;
+
+
+ 
+
+--판매아이템DB & 시퀀스
+create table item (
+  i_category number references category(i_category),   
+  item_num number primary key,       
+  item_name varchar2(30) not null,   
+  item_desc varchar2(1000) not null,
+  item_image varchar2(100),       
+  item_price number,                 
+  item_ongoing number default 0   
+);
+create sequence seq_itemnum nocycle nocache;
+
+ 
+
+ 
+
+--상품리뷰DB
+
+create table review (
+  m_id varchar2(50) not null,        
+  item_num number not null,       
+  --subject varchar2(30) not null, 
+  content varchar2(1000) not null, 
+  rate number not null,         
+  logtime date                    
+);
+
+
+ 
+ 
+
+ 
+
+--장바구니DB & 시퀀스
+
+create table cart (
+  cart_num number primary key,     
+  m_id varchar2(30), 
+  item_num number,
+  --item_name varchar2(30),
+  --item_price number,
+  item_qty number,
+  item_tot number,                
+  o_date date,
+  p_store varchar2(30),         
+  p_request_date varchar2(30),	
+  p_request_time varchar2(30)
+);
+
+create sequence seq_cartnum nocycle nocache;
+
+
+ 
+
+--주문관리DB & 시퀀스 (전화번호 
+
+create table orderlist (
+  o_num number primary key,   	    
+  o_date date not null,  
+  cart_num number not null,  
+  --m_id varchar2(100) references member(m_id),  
+  m_id varchar2(100), 
+  p_request_date varchar2(30),  
+  p_request_time varchar2(30),  
+  p_store varchar2(30),      
+  --i_category number references category(i_category),      v	
+  item_num number references item(item_num),  
+  item_qty number,    
+  item_tot number,  
+  --m_phone varchar2(30), 	                       
+  payment varchar2(20),  
+  p_actual_time varchar2(30),             
+  o_status number default 2               
+);
+create sequence seq_onum nocycle nocache;
+
+
+ 
+
+--월 별 구매수량
+
+--이번달
+
+select count(*) from orderlist where m_id='num1' and o_status>0 and o_date > (SELECT to_char(trunc(sysdate,'mm'),'yyyy-mm-dd') FROM dual) and o_date < (SELECT to_char(trunc(add_months(sysdate, + 1),'mm') ,'yyyy-mm-dd') FROM dual);  
+
+--지난달
+
+select count(*) from orderlist where m_id='num1' and o_status>0 and o_date > (SELECT to_char(trunc(add_months(sysdate, -1), 'mm'),'yyyy-mm-dd') FROM dual) and o_date < (SELECT to_char(trunc(sysdate, 'mm') ,'yyyy-mm-dd') FROM dual);  
+
+--지지난달
+
+select count(*) from orderlist where m_id='num1' and o_status>0 and o_date > (SELECT to_char(trunc(add_months(sysdate, -2), 'mm'),'yyyy-mm-dd') FROM dual) and o_date < (SELECT to_char(trunc(add_months(sysdate, -1), 'mm') ,'yyyy-mm-dd') FROM dual);  
+
+ 
+
+ 
+
+ 
+
+ 
+
+--주문 준비현황 DB
+
+create table status (
+  o_status number primary key,
+  o_comment varchar2(20)
+);
+
+ 
+
+insert into status values (0, '주문취소');
+
+insert into status values (1, '입금대기');
+
+insert into status values (2, '입금완료');
+
+insert into status values (3, '준비 중');
+
+insert into status values (4, '준비완료');
+
+insert into status values (5, '픽업대기');
+
+insert into status values (6, '픽업완료');
+
+ 
+ 
+
+ 
+
+--공지사항 DB & 시퀀스
+
+create table notice(
+  notice_num number primary key,      
+  notice_subject varchar2(100) not null,  
+  notice_content varchar2(2000) not null,
+  notice_logtime date                 
+);
+create sequence seq_noticenum nocycle nocache;
+
+ 
+
+ 
+
+ 
+
+--FAQ DB & 시퀀스
+
+create table faq (
+  faq_num number primary key,        
+  category_name varchar2(100) not null, 
+  faq_subject varchar2(100) not null, 
+  faq_content varchar2(2000) not null,
+  faq_logtime date                   
+);
+create sequence seq_faqnum nocycle nocache;
+
+ 
+
+ 
+
+--문의게시판 & 시퀀스
+
+create table qna(
+  qna_num number primary key,       
+  qna_type varchar2(20),            
+  qna_result varchar2(20),          
+  qna_subject varchar2(100) not null, 
+  qna_content varchar2(1000) not null, 
+  m_id varchar2(30) not null,       
+  qna_logtime date,                  
+  qna_reply varchar2(1000),    
+  qna_redate date,            
+  qna_public varchar2(10),     
+  hit number
+);
+create sequence seq_qnanum nocycle nocache;
+
+
+commit;

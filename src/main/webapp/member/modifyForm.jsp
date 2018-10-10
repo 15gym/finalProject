@@ -21,7 +21,6 @@
 
 
 </script>
-<!--
 <script type="text/javascript">
 	$(document).on('click','#sendCheckEmail', function(){
 		var m_email = $("#m_email").val();
@@ -252,7 +251,7 @@ function modifyCheck(){
 
 
 </script>
- -->
+
 
 
 <style>

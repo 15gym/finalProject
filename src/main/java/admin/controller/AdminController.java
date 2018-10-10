@@ -161,6 +161,7 @@ public class AdminController {
 	}
 	
 	
+	//회원명 or 회원 아이디 검색
 	@RequestMapping(value="/admin/memberNameANDId")
 	public ModelAndView memberNameANDId(HttpServletRequest request) {
 		int pg = 1;
@@ -169,32 +170,31 @@ public class AdminController {
 		// 1이면 이름값 날라오고 2면 아이디값 으로 판단  null이면 회원목록
 		String keywordCheck = request.getParameter("keywordCheck");
 		
-		System.out.println(pg);
-		System.out.println(keyword);
-		System.out.println(keywordCheck);
+		System.out.println("pg:"+pg);
+		System.out.println("keyword:"+keyword);
+		System.out.println("keywordCheck:"+keywordCheck);
 		
 		ModelAndView modelAndView = new ModelAndView();
 		
 		if(keywordCheck.equals("1")) {
 			
-			int endNum = pg*5;
-			int startNum = endNum-4;
+			//int endNum = pg*5;
+			//int startNum = endNum-4;
 			
+			ArrayList<MemberDTO> list = (ArrayList<MemberDTO>)adminService.searchName(keyword);
 			
-			ArrayList<MemberDTO> list = (ArrayList<MemberDTO>)adminService.searchName(keyword,startNum,endNum);
-			
-			int totalA = adminService.getTotalA();	
+			/*int totalA = adminService.getTotalA();	
 			int totalP = (totalA+4) / 5;				
 
 			int startPage = (pg-1)/3*3+1;	
 			int endPage = startPage + 3 - 1;
-			if(totalP < endPage) endPage = totalP;
+			if(totalP < endPage) endPage = totalP;*/
 			modelAndView.addObject("keywordCheck", keywordCheck);
 			modelAndView.addObject("list", list);
-			modelAndView.addObject("startPage", startPage);
-			modelAndView.addObject("endPage", endPage);
-			modelAndView.addObject("pg",pg);
-			modelAndView.addObject("totalP", totalP);
+			modelAndView.addObject("startPage", 1);
+			modelAndView.addObject("endPage", 1);
+			modelAndView.addObject("pg", 1);
+			//modelAndView.addObject("totalP", totalP);
 			modelAndView.addObject("tab", "admin_member.jsp");
 			modelAndView.addObject("display", "adminList.jsp");
 			modelAndView.setViewName("admin_main.jsp");
@@ -204,20 +204,20 @@ public class AdminController {
 			int startNum = endNum-4;
 			
 			
-			ArrayList<MemberDTO> list = (ArrayList<MemberDTO>)adminService.searchId(keyword, startNum, endNum);
+			ArrayList<MemberDTO> list = (ArrayList<MemberDTO>)adminService.searchId(keyword);
 			
-			int totalA = adminService.getTotalA();	
+			/*int totalA = adminService.getTotalA();	
 			int totalP = (totalA+4) / 5;				
 
 			int startPage = (pg-1)/3*3+1;	
 			int endPage = startPage + 3 - 1;
-			if(totalP < endPage) endPage = totalP;
+			if(totalP < endPage) endPage = totalP;*/
 			modelAndView.addObject("keywordCheck", keywordCheck);
 			modelAndView.addObject("list", list);
-			modelAndView.addObject("startPage", startPage);
-			modelAndView.addObject("endPage", endPage);
-			modelAndView.addObject("pg",pg);
-			modelAndView.addObject("totalP", totalP);
+			modelAndView.addObject("startPage", 1);
+			modelAndView.addObject("endPage", 1);
+			modelAndView.addObject("pg",1);
+			//modelAndView.addObject("totalP", totalP);
 			modelAndView.addObject("tab", "admin_member.jsp");
 			modelAndView.addObject("display", "adminList.jsp");
 			modelAndView.setViewName("admin_main.jsp");

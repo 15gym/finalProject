@@ -45,19 +45,19 @@
 		SELECT count(*) FROM member
 	</select>
 	
-	<select id="searchName" parameterType="java.util.Map" resultType="memberDTO">
+	<select id="searchName" parameterType="String" resultType="memberDTO">
       <![CDATA[select m_num, m_name, m_id, m_phone, m_email, 
 		to_char(m_logtime, 'YYYY.MM.DD')as m_logtime from 
 		(select rownum rn, tt.* from 
 		(select * from member order by m_num desc) tt) 
-		where rn>=#{startNum} and rn<=#{endNum} and m_name= #{m_name}]]>
+		where m_name= #{m_name}]]>
 	</select>
 	
-	<select id="searchId" parameterType="java.util.Map" resultType="memberDTO">
+	<select id="searchId" parameterType="String" resultType="memberDTO">
      <![CDATA[select m_num, m_name, m_id, m_phone, m_email, 
 		to_char(m_logtime, 'YYYY.MM.DD')as m_logtime from 
 		(select rownum rn, tt.* from 
 		(select * from member order by m_num desc) tt) 
-		where rn>=#{startNum} and rn<=#{endNum} and m_id= #{m_id}]]>
+		where m_id= #{m_id}]]>
 	</select>
 </mapper>

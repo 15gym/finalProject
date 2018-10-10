@@ -233,6 +233,7 @@ $(function() {
                     alert("사용가능한 아이디입니다.");
                     document.adminjoinForm.joincheckbutton.disabled = true;
                     $("#a_pwd").focus();
+                    document.adminjoinForm.a_id.setAttribute("readonly", "true");
                     idck = 1;
                 }
             },

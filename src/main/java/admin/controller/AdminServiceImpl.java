@@ -51,13 +51,13 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public List<MemberDTO> searchName(String m_name,int startNum, int endNum) {
-		return adminDAO.searchName(m_name,startNum,endNum);
+	public List<MemberDTO> searchName(String m_name) {
+		return adminDAO.searchName(m_name);
 	}
 
 	@Override
-	public List<MemberDTO> searchId(String m_id,int startNum, int endNum) {
-		return adminDAO.searchId(m_id,startNum,endNum);
+	public List<MemberDTO> searchId(String m_id) {
+		return adminDAO.searchId(m_id);
 	}
 
 }

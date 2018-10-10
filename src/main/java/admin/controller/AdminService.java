@@ -20,9 +20,9 @@ public interface AdminService {
 	
 	public List<MemberDTO> memberList(int startNum, int endNum);
 	
-	public List<MemberDTO> searchName(String m_name,int startNum, int endNum);
+	public List<MemberDTO> searchName(String m_name);
 	
-	public List<MemberDTO> searchId(String m_id,int startNum, int endNum);
+	public List<MemberDTO> searchId(String m_id);
 	
 	public int getTotalA();
 }

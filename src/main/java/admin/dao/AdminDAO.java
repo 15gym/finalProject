@@ -45,7 +45,7 @@ public class AdminDAO {
 	}
 	
 	
-	
+	//회원 목록
 	public List<MemberDTO> memberList(int startNum, int endNum){
 		Map<String, Integer> map = new HashMap<>();
 		map.put("startNum", startNum);
@@ -54,24 +54,29 @@ public class AdminDAO {
 		return sessionTemplate.selectList("mybatis.cateMapper.memberList", map);
 	}
 	
+	//회원 수
 	public int getTotalA() {
 		return sessionTemplate.selectOne("mybatis.cateMapper.getTotalA");
 	}
 	
-	public List<MemberDTO> searchName(String m_name,int startNum, int endNum){
+	//회원 이름 검색 결과
+	public List<MemberDTO> searchName(String m_name){
+		/*
 		Map<String, Object> map = new HashMap<>();
 		map.put("startNum", startNum);
 		map.put("endNum", endNum);
-		map.put("m_name", m_name);
-		return sessionTemplate.selectList("mybatis.cateMapper.searchName", map);
+		map.put("m_name", m_name);*/
+		return sessionTemplate.selectList("mybatis.cateMapper.searchName", m_name);
 	}
 	
-	public List<MemberDTO> searchId(String m_id,int startNum, int endNum){
+	//회원 아이디 검색 결과
+	public List<MemberDTO> searchId(String m_id){
 		Map<String, Object> map = new HashMap<>();
+		/*
 		map.put("startNum", startNum);
 		map.put("endNum", endNum);
-		map.put("m_id", m_id);
-		return sessionTemplate.selectList("mybatis.cateMapper.searchId", map);
+		map.put("m_id", m_id); */
+		return sessionTemplate.selectList("mybatis.cateMapper.searchId", m_id);
 	}
 	
 }
