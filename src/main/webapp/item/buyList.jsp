@@ -185,7 +185,9 @@ $(function () {
 	}); 
  	
   	$("#resetButton").click(function(){   
- 		 location.reload();   
+		 $("#total_money").children().text("0");
+ 		 $("#ADD_PRODUCT").empty();  
+ 		$("#ADD_PRODUCT").append("<span>ADD PRODUCT</span>");
   	}); 
 
 
@@ -198,7 +200,7 @@ $(function () {
 	<div class="buyList">
 		<form action="cartAdd?category=${param.category}" method="post" name="cartAddForm">
 			<ul>
-				<li>
+				<li id="ADD_PRODUCT">
 					<span>ADD PRODUCT</span>
 				</li>
 
